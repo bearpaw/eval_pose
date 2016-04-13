@@ -11,12 +11,12 @@ The evaluation code for the PCP and the PCK measurements are from a widely used 
 
 ## Citation
 
-@InProceedings{yang2016end,
-  Title 		= {End-to-End Learning of Deformable Mixture of Parts and Deep Convolutional Neural Networks for Human Pose Estimation},
-  Author 		= {Yang, Wei and Ouyang, Wanli and Li, Hongsheng and Wang, Xiaogang},
-  Booktitle 	= {CVPR},
-  Year 			= {2016}
-}
+	@InProceedings{yang2016end,
+	  Title 		= {End-to-End Learning of Deformable Mixture of Parts and Deep Convolutional Neural Networks for Human Pose Estimation},
+	  Author 		= {Yang, Wei and Ouyang, Wanli and Li, Hongsheng and Wang, Xiaogang},
+	  Booktitle 	= {CVPR},
+	  Year 			= {2016}
+	}
 
 
 ## References
