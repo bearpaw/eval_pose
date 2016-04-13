@@ -1,18 +1,14 @@
-% PARSE joint
-% 1	Left ankle
-% 2	Left knee
-% 3	Left hip
-% 4	Right hip
-% 5	Right knee
-% 6	Right ankle
-% 7	Left wrist
-% 8	Left elbow
-% 9	Left shoulder
-% 10	Right shoulder
-% 11	Right elbow
-% 12	Right wrist
-% 13	Neck 
-% 14	Head top
+% FLIC joint
+% 1 nose
+% 2 neck (interpolated)
+% 3 right shoulder
+% 4 right elbow
+% 5 right wrist
+% 6 right hip
+% 7 left shoulder
+% 8 left elbow
+% 9 left wrist
+% 10 left hip
 startup;
 
 reference_joints_pair = [6, 7];     % right shoulder and left hip (from observer's perspective)
@@ -25,7 +21,7 @@ symmetry_part_id = [1,2,5,6,3,4];
 part_name = {'Head', 'Torso', 'U.arms', 'L.arms'};
 
 %% Evaluate FLIC (Observer Centric)
-load('gt/flic-joints-test-oc.mat', 'joints'); % load original parse labels
+load('gt/flic-joints-test-oc.mat', 'joints'); % load original FLIC labels
 eval_name = 'FLIC-OC';
 
 % eval PCP
