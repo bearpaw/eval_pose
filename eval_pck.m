@@ -3,7 +3,7 @@ function eval_pck(pred, joints, symmetry_joint_id, joint_name, name)
 % as defined in [Sapp&Taskar, CVPR'13].
 % torso height: ||left_shoulder - right hip||
 range = 0:0.01:0.2;
-show_joint_ids = (symmetry_joint_id >= 1:numel(symmetry_joint_id)); 
+show_joint_ids = (symmetry_joint_id >= 1:numel(symmetry_joint_id));
 
 % compute distance to ground truth joints
 dist = get_dist_pck(pred,joints(1:2,:,:));
@@ -30,13 +30,19 @@ assert(size(pred,1) == size(gt,1) && size(pred,2) == size(gt,2) && size(pred,3) 
 dist = nan(1,size(pred,2),size(pred,3));
 
 for imgidx = 1:size(pred,3)
-    
-    % torso diameter
+  
+  % torso diameter
+  if size(gt, 2) == 14
     refDist = norm(gt(:,10,imgidx) - gt(:,3,imgidx));
-    
-    % distance to gt joints
-    dist(1,:,imgidx) = sqrt(sum((pred(:,:,imgidx) - gt(:,:,imgidx)).^2,1))./refDist;
-
+  elseif size(gt, 2) == 10 % 10 joints FLIC
+    refDist = norm(gt(:,7,imgidx) - gt(:,6,imgidx));
+  else
+    error('Number of joints should be 14 or 10');
+  end
+  
+  % distance to gt joints
+  dist(1,:,imgidx) = sqrt(sum((pred(:,:,imgidx) - gt(:,:,imgidx)).^2,1))./refDist;
+  
 end
 
 
@@ -46,23 +52,23 @@ function pck = compute_pck(dist,range)
 pck = zeros(numel(range),size(dist,2)+1);
 
 for jidx = 1:size(dist,2)
-    % compute PCK for each threshold
-    for k = 1:numel(range)
-        pck(k,jidx) = 100*mean(squeeze(dist(1,jidx,:))<=range(k));
-    end
+  % compute PCK for each threshold
+  for k = 1:numel(range)
+    pck(k,jidx) = 100*mean(squeeze(dist(1,jidx,:))<=range(k));
+  end
 end
 
 % compute average PCK
 for k = 1:numel(range)
-    pck(k,end) = 100*mean(reshape(squeeze(dist(1,:,:)),size(dist,2)*size(dist,3),1)<=range(k));
+  pck(k,end) = 100*mean(reshape(squeeze(dist(1,:,:)),size(dist,2)*size(dist,3),1)<=range(k));
 end
 
 % -------------------------------------------------------------------------
 function auc = area_under_curve(xpts,ypts)
 
 if nargin == 1
-    ypts = xpts;
-    xpts = (1:size(ypts,2))/size(ypts,2);
+  ypts = xpts;
+  xpts = (1:size(ypts,2))/size(ypts,2);
 end
 
 a = min(xpts);
