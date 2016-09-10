@@ -36,8 +36,10 @@ for imgidx = 1:size(pred,3)
     refDist = norm(gt(:,10,imgidx) - gt(:,3,imgidx));
   elseif size(gt, 2) == 10 % 10 joints FLIC
     refDist = norm(gt(:,7,imgidx) - gt(:,6,imgidx));
+  elseif size(gt, 2) == 11 % 11 joints FLIC
+    refDist = norm(gt(:,4,imgidx) - gt(:,11,imgidx));
   else
-    error('Number of joints should be 14 or 10');
+    error('Number of joints should be 14 or 10 or 11');
   end
   
   % distance to gt joints
