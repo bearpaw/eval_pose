@@ -26,7 +26,8 @@ eval_name = 'FLIC-OC';
 
 % eval PCP
 load('results/FLIC/pred_sticks_flic_oc.mat', 'pred');
-eval_pcp(pred, joints, symmetry_part_id, part_name, eval_name);
+gt_sticks = keypoints2sticks(joints);
+eval_pcp(pred, gt_sticks, symmetry_part_id, part_name, eval_name);
 
 % eval PCK
 load('results/FLIC/pred_keypoints_flic_oc.mat', 'pred');

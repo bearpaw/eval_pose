@@ -33,7 +33,8 @@ eval_name = 'PARSE-PC';
 
 % eval PCP
 load('results/PARSE/pred_sticks_parse_pc.mat', 'pred');
-eval_pcp(pred, joints, symmetry_part_id, part_name, eval_name);
+gt_sticks = keypoints2sticks(joints);
+eval_pcp(pred, gt_sticks, symmetry_part_id, part_name, eval_name);
 
 % eval PCK
 load('results/PARSE/pred_keypoints_parse_pc.mat', 'pred');

@@ -1,9 +1,9 @@
-function eval_pcp(pred, joints, symmetry_part_id, part_name, name)
+function eval_pcp(pred, gt_sticks, symmetry_part_id, part_name, name)
 show_part_ids = find(symmetry_part_id >= 1:numel(symmetry_part_id));
 % evaluate strict PCP
 range = 0.5;
 % compute distance to ground truth joints
-dist = getDistPCP(pred,joints(1:2,:,:));
+dist = getDistPCP(pred,gt_sticks);
 
 % compute PCP
 pcp = computePCP(dist,range);
@@ -14,9 +14,7 @@ print_pcp(pcp, show_part_ids, part_name, name);
 
 
 % -------------------------------------------------------------------------
-function dist = getDistPCP(pred,gt)
-% convert joint annotations into sticks
-gt_sticks = keypoints2sticks(gt);
+function dist = getDistPCP(pred,gt_sticks)
 % assert(size(gt_sticks,2) == 20);
 assert(size(pred,1) == size(gt_sticks,1) && size(pred,2) == size(gt_sticks,2) && size(pred,3) == size(gt_sticks,3));
 

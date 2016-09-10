@@ -32,7 +32,8 @@ eval_name = 'LSP-OC';
 
 % eval PCP
 load('results/LSP/pred_sticks_lsp_oc.mat', 'pred');
-eval_pcp(pred, joints, symmetry_part_id, part_name, eval_name);
+gt_sticks = keypoints2sticks(joints);
+eval_pcp(pred, gt_sticks, symmetry_part_id, part_name, eval_name);
 
 % eval PCK
 load('results/LSP/pred_keypoints_lsp_oc.mat', 'pred');
@@ -48,7 +49,8 @@ eval_name = 'LSP-PC';
 
 % eval PCP
 load('results/LSP/pred_sticks_lsp_pc.mat', 'pred');
-eval_pcp(pred, joints, symmetry_part_id, part_name, eval_name);
+gt_sticks = keypoints2sticks(joints);
+eval_pcp(pred, gt_sticks, symmetry_part_id, part_name, eval_name);
 
 % eval PCK
 load('results/LSP/pred_keypoints_lsp_pc.mat', 'pred');
